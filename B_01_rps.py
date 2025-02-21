@@ -1,3 +1,6 @@
+import random
+
+
 # functions
 
 def make_statement(statement, decoration):
@@ -63,6 +66,22 @@ def int_check(question):
             print(error)
 
 
+def rps_compare(user, comp):
+    """Compares user and computer choice and turns win/lose/tie"""
+    if user == comp:
+        result = "tie"
+    elif user == "paper" and comp == "rock":
+        result = "win"
+    elif user == "rock" and comp == "scissors":
+        result = "win"
+    elif user == "scissors" and comp == "paper":
+        result = "win"
+    else:
+        result = "lose"
+
+    return result
+
+
 # main routine starts here
 
 # initialise game variables
@@ -94,9 +113,11 @@ while rounds_played < num_rounds:
     else:
         rounds_heading = f"\n🪨📃✂️ Round {rounds_played + 1} of {num_rounds} ✂️📃🪨"
 
-    print(rounds_heading)
-    print()
+    print(rounds_heading, "\n")
 
+    # random bot choice from the list excluding exit code
+    comp_choice = random.choice(rps_list[:-1])
+    print("Computer choice", comp_choice)
     # user choice
 
     user_choice = string_checker("Choose: ", rps_list)
@@ -105,6 +126,9 @@ while rounds_played < num_rounds:
     # exit code
     if user_choice == "xxx":
         break
+
+    result = rps_compare(user_choice, comp_choice)
+    print (f"{user_choice} vs {comp_choice}, {result}")
 
     rounds_played += 1
 
@@ -115,3 +139,4 @@ while rounds_played < num_rounds:
 # game loop ends
 
 # game stats
+
